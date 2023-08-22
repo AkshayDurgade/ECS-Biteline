@@ -1,0 +1,19 @@
+name: Push images to ECR
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on:  ubuntu-latest
+    steps:
+      - name: Checkout code on push or workflow dispatch
+      - uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+      - uses: 
