@@ -8,12 +8,24 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write   # This is required for requesting the JWT
+  contents: read    # This is required for actions/checkout
+
+env:
+  REGION_NAME: ap-south-1
+
 jobs:
   deploy:
     runs-on:  ubuntu-latest
     steps:
       - name: Checkout code on push or workflow dispatch
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Configure AWS Credentials
-      - uses: 
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.ROLE_TO_ASSUME }}:role/ecs-automate
+          role-session-name: ecs-session
+          aws-region: ${{ env.REGION_NAME }}
+
