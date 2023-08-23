@@ -20,7 +20,7 @@ jobs:
     runs-on:  ubuntu-latest
     steps:
       - name: Checkout code on push or workflow dispatch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -29,3 +29,6 @@ jobs:
           role-session-name: ecs-session
           aws-region: ${{ env.REGION_NAME }}
 
+          - name: Login to Amazon ECR
+            id: login-ecr
+            uses: aws-actions/amazon-ecr-login@v1
