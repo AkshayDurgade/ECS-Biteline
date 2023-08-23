@@ -46,8 +46,10 @@ jobs:
 
       - name: Build, tag, and push image to Amazon ECR
         env:
-          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ secrets.ECR_REPO }}
+          # ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          # ECR_REPOSITORY: ${{ secrets.ECR_REPO }}
+          ECR_REGISTRY: 069039788016.dkr.ecr.ap-south-1.amazonaws.com/node-ecs-gh
+          ECR_REPOSITORY: node-ecs-gh
           IMAGE_TAG: node-ecs-gh-image-${{ github.run_number }}-${{ steps.date.outputs.date }}
           IMAGE_NAME: node-api-image-${{ steps.date.outputs.date }}
         run: |
