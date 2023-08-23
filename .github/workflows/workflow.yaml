@@ -14,7 +14,7 @@ permissions:
 
 env:
   REGION_NAME: ap-south-1
-
+  IMAGE_NAME: node-ecs-image
 jobs:
   deploy:
     runs-on:  ubuntu-latest
@@ -51,12 +51,12 @@ jobs:
           ECR_REGISTRY: 069039788016.dkr.ecr.ap-south-1.amazonaws.com/node-ecs-gh
           ECR_REPOSITORY: node-ecs-gh
           IMAGE_TAG: node-ecs-gh-image-${{ github.run_number }}-${{ steps.date.outputs.date }}
-          IMAGE_NAME: node-ecs-image
+          
         run: |
-          echo "docker build -t ${{ IMAGE_NAME }} ./nodeJS"
-          echo "docker tag ${{ IMAGE_NAME }}:latest ${{ ECR_REGISTRY }}:${{ steps.date.outputs.date }}"
+          echo "docker build -t ${{ env.IMAGE_NAME }} ./nodeJS"
+          echo "docker tag ${{ env.IMAGE_NAME }}:latest ${{ ECR_REGISTRY }}:${{ steps.date.outputs.date }}"
           echo "docker push ${{ ECR_REGISTRY }}:${{ steps.date.outputs.date }}"
-          docker build -t ${{ IMAGE_NAME }} ./nodeJS
-          docker tag ${{ IMAGE_NAME }}:latest ${{ ECR_REGISTRY }}:${{ steps.date.outputs.date }}
+          docker build -t ${{ env.IMAGE_NAME }} ./nodeJS
+          docker tag ${{ env.IMAGE_NAME }}:latest ${{ ECR_REGISTRY }}:${{ steps.date.outputs.date }}
           docker push ${{ ECR_REGISTRY }}:${{ steps.date.outputs.date }}
 
