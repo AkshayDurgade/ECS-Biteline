@@ -51,7 +51,7 @@ jobs:
           IMAGE_TAG: node-ecs-gh-image-${{ github.run_number }}-${{ steps.date.outputs.date }}
           IMAGE_NAME: node-api-image-${{ steps.date.outputs.date }}
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./ECS/nodeJS
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./nodeJS
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "Image Name: $IMAGE_NAME"
           echo "Image Tag: $IMAGE_TAG"

@@ -1,0 +1,22 @@
+{
+  "name": "simple-node-server",
+  "version": "1.0.0",
+  "description": "To do the ECS task this server will be hosted using our AWS ECS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AkshayDurgade/ECS-Biteline.git"
+  },
+  "author": "Akshay Durgade",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AkshayDurgade/ECS-Biteline/issues"
+  },
+  "homepage": "https://github.com/AkshayDurgade/ECS-Biteline#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
