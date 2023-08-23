@@ -40,3 +40,6 @@ jobs:
         #   registry: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.REGION_NAME }}.amazonaws.com
         #   username: docker_username_${{ secrets.DOCKER_USERNAME }}_dkr_ecr_aws_region_1_amazonaws_com
         #   password: docker_password_${{ secrets.DOCKER_PASS }}_dkr_ecr_aws_region_1_amazonaws_com
+      - name: Get current date
+        id: date
+        run:  echo "::set-output name=date::$(date +'%d-%m-%y')"
