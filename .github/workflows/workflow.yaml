@@ -33,6 +33,10 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
         with:
-          registry: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.REGION_NAME }}.amazonaws.com
-          username: docker_username_${{ secrets.DOCKER_USERNAME }}_dkr_ecr_aws_region_1_amazonaws_com
-          password: docker_password_${{ secrets.DOCKER_PASS }}_dkr_ecr_aws_region_1_amazonaws_com
+          mask-password: 'true'
+        # Safety measures but not expected 
+        #
+        # with:
+        #   registry: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ env.REGION_NAME }}.amazonaws.com
+        #   username: docker_username_${{ secrets.DOCKER_USERNAME }}_dkr_ecr_aws_region_1_amazonaws_com
+        #   password: docker_password_${{ secrets.DOCKER_PASS }}_dkr_ecr_aws_region_1_amazonaws_com
