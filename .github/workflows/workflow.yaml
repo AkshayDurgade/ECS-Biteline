@@ -14,7 +14,8 @@ permissions:
 
 env:
   REGION_NAME: ap-south-1
-
+  ECS_TASK_DEFINITION: ./task-definition.json
+  CONTAINER_NAME: node-ecs
 jobs:
   deploy:
     runs-on:  ubuntu-latest
@@ -45,6 +46,7 @@ jobs:
         run:  echo "::set-output name=date::$(date +'%d-%m-%y')"
 
       - name: Build, tag, and push image to Amazon ECR
+        id: build-image
         env:
           # ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           # ECR_REPOSITORY: ${{ secrets.ECR_REPO }}
@@ -65,6 +67,14 @@ jobs:
           echo "Image Name: $IMAGE_NAME"
           echo "Image Tag: $IMAGE_TAG"
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+        - name: Fill in the new image ID in the Amazon ECS task definition
+          id: task-def
+          uses: aws-actions/amazon-ecs-render-task-definition@c804dfbdd57f713b6c079302a4c01db7017a36fc
+          with:
+            task-definition: ${{ env.ECS_TASK_DEFINITION }}
+            container-name: ${{ env.CONTAINER_NAME }}
+            image: ${{ steps.build-image.outputs.image }}
 
       - name: Deploy to Amazon ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
