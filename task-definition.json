@@ -32,6 +32,7 @@
         }
     ],
     "family": "node-ecs-task-definition",
+    "executionRoleArn": "arn:aws:iam::069039788016:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
     "revision": 4,
     "volumes": [],
