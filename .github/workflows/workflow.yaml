@@ -84,4 +84,8 @@ jobs:
           service:  my-service
           cluster:  node-ecs-cluster
           wait-for-service-stability: true
+      
+      - name: Update ECS Service Count
+        run: |
+          aws ecs update-service --cluster sag-ECS-cluster --service sag-ecs-service --desired-count 2
 
